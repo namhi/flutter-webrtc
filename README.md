@@ -4,6 +4,9 @@
 
 WebRTC plugin for Flutter Mobile/Desktop/Web
 
+# Attention
+This package only using for personal. Please do not using it
+
 </br>
 <p align="center">
 <strong>Sponsored with 💖 &nbsp by</strong><br />
