@@ -1,5 +1,7 @@
 package com.cloudwebrtc.webrtc.audio;
 
+import static java.util.Collections.emptyList;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.AudioManager;
@@ -46,8 +48,8 @@ public class AudioSwitchManager {
     // AudioSwitch is not threadsafe, so all calls should be done on the main thread.
     private final Handler handler = new Handler(Looper.getMainLooper());
 
-    @Nullable
-    private AudioSwitch audioSwitch;
+//    @Nullable
+//    private AudioSwitch audioSwitch;
 
     public AudioSwitchManager(@NonNull Context context) {
         this.context = context;
@@ -62,42 +64,42 @@ public class AudioSwitchManager {
     }
 
     private void initAudioSwitch() {
-        if (audioSwitch == null) {
-            handler.removeCallbacksAndMessages(null);
-            handler.postAtFrontOfQueue(() -> {
-                audioSwitch = new AudioSwitch(
-                        context,
-                        loggingEnabled,
-                        audioFocusChangeListener,
-                        preferredDeviceList
-                );
-                audioSwitch.start(audioDeviceChangeListener);
-            });
-        }
+//        if (audioSwitch == null) {
+//            handler.removeCallbacksAndMessages(null);
+//            handler.postAtFrontOfQueue(() -> {
+//                audioSwitch = new AudioSwitch(
+//                        context,
+//                        loggingEnabled,
+//                        audioFocusChangeListener,
+//                        preferredDeviceList
+//                );
+//                audioSwitch.start(audioDeviceChangeListener);
+//            });
+//        }
     }
 
     public void start() {
-        if (audioSwitch != null) {
-            handler.removeCallbacksAndMessages(null);
-            handler.postAtFrontOfQueue(() -> {
-                if (!isActive) {
-                    Objects.requireNonNull(audioSwitch).activate();
-                    isActive = true;
-                }
-            });
-        }
+//        if (audioSwitch != null) {
+//            handler.removeCallbacksAndMessages(null);
+//            handler.postAtFrontOfQueue(() -> {
+//                if (!isActive) {
+//                    Objects.requireNonNull(audioSwitch).activate();
+//                    isActive = true;
+//                }
+//            });
+//        }
     }
 
     public void stop() {
-        if (audioSwitch != null) {
-            handler.removeCallbacksAndMessages(null);
-            handler.postAtFrontOfQueue(() -> {
-                if (isActive) {
-                    Objects.requireNonNull(audioSwitch).deactivate();
-                    isActive = false;
-                }
-            });
-        }
+//        if (audioSwitch != null) {
+//            handler.removeCallbacksAndMessages(null);
+//            handler.postAtFrontOfQueue(() -> {
+//                if (isActive) {
+//                    Objects.requireNonNull(audioSwitch).deactivate();
+//                    isActive = false;
+//                }
+//            });
+//        }
     }
 
     public void setMicrophoneMute(boolean mute){
@@ -106,28 +108,30 @@ public class AudioSwitchManager {
 
     @Nullable
     public AudioDevice selectedAudioDevice() {
-        return Objects.requireNonNull(audioSwitch).getSelectedAudioDevice();
+        //return Objects.requireNonNull(audioSwitch).getSelectedAudioDevice();
+        return null;
     }
 
     @NonNull
     public List<AudioDevice> availableAudioDevices() {
-        return Objects.requireNonNull(audioSwitch).getAvailableAudioDevices();
+        //return Objects.requireNonNull(audioSwitch).getAvailableAudioDevices();
+        return emptyList();
     }
 
     public void selectAudioOutput(@NonNull Class<? extends AudioDevice> audioDeviceClass) {
-        handler.post(() -> {
-            List<AudioDevice> devices = availableAudioDevices();
-            AudioDevice audioDevice = null;
-            for (AudioDevice device : devices) {
-                if (device.getClass().equals(audioDeviceClass)) {
-                    audioDevice = device;
-                    break;
-                }
-            }
-            if (audioDevice != null) {
-                Objects.requireNonNull(audioSwitch).selectDevice(audioDevice);
-            }
-        });
+//        handler.post(() -> {
+//            List<AudioDevice> devices = availableAudioDevices();
+//            AudioDevice audioDevice = null;
+//            for (AudioDevice device : devices) {
+//                if (device.getClass().equals(audioDeviceClass)) {
+//                    audioDevice = device;
+//                    break;
+//                }
+//            }
+//            if (audioDevice != null) {
+//                Objects.requireNonNull(audioSwitch).selectDevice(audioDevice);
+//            }
+//        });
     }
 
     public void enableSpeakerphone(boolean enable) {
